@@ -24,14 +24,12 @@ pipeline {
             }
             
             post {
-                success {
-                    emailext (
-                        subject: "Pipeline Successful",
-                        body: "Your Jenkins pipeline succeeded. Good job!",
-                        recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                        to: "pjgichana@gmail.com"
-                    )
-                }
+                always {
+            emailext body: 'A Test EMail',
+            recipientProviders: [[$class: 'DevelopersRecipientProvider'] , [$class: 'RequesterRecipientProvider']], 
+            subject: 'Test'
+        }
+    }
                 }
         }
     }
