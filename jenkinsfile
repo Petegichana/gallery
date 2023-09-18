@@ -25,34 +25,21 @@ pipeline {
         }
     }
     
-    post {
-        success {
-            emailext attachLog: true, 
-                body:
-                    """
-                    <p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p>
-                    <p>
-                    View console output at 
-                    "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"
-                    </p> 
-                      <p><i>(Build log is attached.)</i></p>
-                    """,
-                subject: "Status: 'SUCCESS' -Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-                to: 'ptahgich177@gmail.com'
-        }
-        failure {
-            emailext attachLog: true, 
-                body:
-                    """
-                    <p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'</b></p>
-                    <p>
-                    View console output at 
-                    "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"
-                    </p> 
-                      <p><i>(Build log is attached.)</i></p>
-                    """,
-                subject: "Status: FAILURE -Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-                to: 'ptahgich177@gmail.com'
-        }
-    }
-}
+    post {  
+        always {  
+            echo 'This will always run'  
+        }  
+        success {  
+            echo 'This will run only if successful'  
+        }  
+        failure {  
+            mail bcc: '', body: "<b>Example</b><br>Project," to: "pjgichana@gmail.com";  
+        }  
+        unstable {  
+            echo 'This will run only if the run was marked as unstable'  
+        }  
+        changed {  
+            echo 'This will run only if the state of the Pipeline has changed'  
+            echo 'For example, if the Pipeline was previously failing but is now successful'  
+        }  
+    }  
