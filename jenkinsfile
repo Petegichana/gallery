@@ -27,7 +27,7 @@ pipeline {
                     emailext (
                         subject: 'Test Results: Successful',
                         body: 'The tests were successful.',
-                        to: 'ptahgich177@gmail.com',,
+                        to: 'ptahgich177@gmail.com',
                     )
                 }
             }
