@@ -17,10 +17,13 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
-        // Add more stages here as needed
+        stage('tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
     }
-    
+
     
     // Add post-build actions if necessary
 }
