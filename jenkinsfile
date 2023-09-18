@@ -17,28 +17,30 @@ pipeline {
                 sh 'npm install'
             }
         }
+        
         stage('tests') {
             steps {
                 sh 'npm test'
             }
+            
+            post {
+                success {
+                    emailext (
+                        subject: "Pipeline Successful",
+                        body: "Your Jenkins pipeline succeeded. Good job!",
+                        recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+                        to: "pjgichana@gmail.com"
+                    )
+                }
+                failure {
+                    emailext (
+                        subject: "Pipeline Failed",
+                        body: "Your Jenkins pipeline has failed. Please investigate.",
+                        recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+                        to: "pjgichana@gmail.com"
+                    )
+                }
+            }
         }
-        post {
-            success {
-                emailext (
-                    subject: "Pipeline Successful",
-                    body: "Your Jenkins pipeline succeeded. Good job!",
-                    recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                    to: "pjgichana@gmail.com"
-                )
-            }
-            failure {
-                emailext (
-                    subject: "Pipeline Failed",
-                    body: "Your Jenkins pipeline has failed. Please investigate.",
-                    recipientProviders: [[$class: 'CulpritsRecipientProvider']],
-                    to: "pjgichana@gmail.com"
-                )
-            }
     }
-}
 }
