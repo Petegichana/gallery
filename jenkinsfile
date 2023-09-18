@@ -33,7 +33,7 @@ pipeline {
             echo 'This will run only if successful'  
         }  
         failure {  
-            mail bcc: '', body: "<b>Example</b><br>Project," to: "pjgichana@gmail.com";  
+            mail bcc: '', body: "<b>Example</b><br>Project," to: "pjgichana@gmail.com"  
         }  
         unstable {  
             echo 'This will run only if the run was marked as unstable'  
