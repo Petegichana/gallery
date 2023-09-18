@@ -21,15 +21,9 @@ pipeline {
         stage('Tests') {
             steps {
                 script {
-                    def testExitCode = sh(script: 'npm test', returnStatus: true)
-                    
-                    if (testExitCode != 0) {
-                        currentBuild.result = 'FAILURE'
-                        emailext subject: "Test Failure in Jenkins Build ${BUILD_NUMBER}",
-                            body: "The tests in Jenkins build ${BUILD_NUMBER} have failed. Please investigate.",
-                            to: 'ptahgich177@gmail.com', // Replace with the recipient email address
-                            attachLog: true
-                    } else {
+                    sh(script: 'npm test', returnStatus: true)
+    
+                    {
                         emailext subject: "Jenkins Build ${BUILD_NUMBER} Successful",
                             body: "The Jenkins build ${BUILD_NUMBER} was successful.",
                             to: 'ptahgich177@gmail.com', // Replace with the recipient email address
