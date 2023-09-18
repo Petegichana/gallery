@@ -9,10 +9,7 @@ pipeline{
         }
     stage{
         stage('install dependancies'){
-            step{ sh 'npm install'}
+            steps{ sh 'npm install'}
         }
     }    
-
-    }
-
 }
