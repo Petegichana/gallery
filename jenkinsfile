@@ -23,7 +23,7 @@ pipeline {
                 script {
                     def testExitCode = sh(script: 'npm test', returnStatus: true)
                     
-                    if (testExitCode != 0) {
+                    if (testExitCode == 0) {
                         currentBuild.result = 'FAILURE'
                         emailext subject: "Test Failure in Jenkins Build ${BUILD_NUMBER}",
                             body: "The tests in Jenkins build ${BUILD_NUMBER} have failed. Please investigate.",
