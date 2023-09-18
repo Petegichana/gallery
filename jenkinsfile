@@ -1,16 +1,25 @@
-pipeline{
+pipeline {
     agent any
-    tools{
+    
+    tools {
         nodejs 'NodeJS'
     }
-    stages{
-        stage('cloning repo'){
-            steps{git 'https://github.com/Petegichana/gallery.git'}
+    
+    stages {
+        stage('Cloning repo') {
+            steps {
+                git 'https://github.com/Petegichana/gallery.git'
+            }
         }
+        
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        
+        // Add more stages here as needed
     }
-    stages{
-        stage('install dependancies'){
-            steps{ sh 'npm install'}
-        }
-    }    
+    
+    // Add post-build actions if necessary
 }
