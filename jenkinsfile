@@ -33,7 +33,7 @@ pipeline {
                         currentBuild.result = 'FAILURE'
                         emailext subject: "Test Failure in Jenkins Build ${BUILD_NUMBER}",
                             body: "The tests in Jenkins build ${BUILD_NUMBER} have failed. Please investigate.",
-                            to: 'your-email@example.com', // Replace with the recipient email address
+                            to: 'ptahgich177@gmail.com', 
                             attachLog: true
                     }
                 }
