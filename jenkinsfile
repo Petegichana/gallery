@@ -7,6 +7,11 @@ pipeline{
         stage('cloning repo'){
             steps{git 'https://github.com/Petegichana/gallery.git'}
         }
+    stage{
+        stage('install dependancies'){
+            step{ sh 'npm install'}
+        }
+    }    
 
     }
 
