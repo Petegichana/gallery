@@ -1,0 +1,13 @@
+pipeline{
+    agent any
+    tools{
+        nodejs 'NodeJs'
+    }
+    stages{
+        stage('cloning repo'){
+            steps{git 'https://github.com/Petegichana/gallery.git'}
+        }
+
+    }
+
+}
