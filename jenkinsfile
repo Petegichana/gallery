@@ -24,14 +24,15 @@ pipeline {
             }
             
             post {
-                failure {
+                success {
                     emailext (
-                        subject: "Pipeline Failed ${currentBuild.result}: ${currentBuild.fullDisplayName}",
-                        body: "Your Jenkins pipeline is done ${currentBuild.result}",
+                        subject: "Pipeline Successful",
+                        body: "Your Jenkins pipeline succeeded. Good job!",
+                        recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                         to: "pjgichana@gmail.com"
                     )
                 }
-            }
+                }
         }
     }
 }
