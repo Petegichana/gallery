@@ -20,17 +20,25 @@ pipeline {
         
         stage('Tests') {
             steps {
-                sh 'npm test'
-            }
-            post {
-                success {
-                    emailext (
-                        subject: 'Test Results: Successful',
-                        body: 'The tests were successful.',
-                        to: 'ptahgich177@gmail.com',
-                    )
+                script {
+                    def testResult = sh(script: 'npm test', returnStatus: true)
+                    if (testResult != 0) {
+                        currentBuild.result = 'FAILURE'
+                        emailext subject: "Test Failed: ${env.JOB_NAME}",
+                                  body: "The tests for ${env.JOB_NAME} have failed. Please check the build for more details.",
+                                  to: 'ptahgich177@gmail.com',
+                                  attachLog: true,
+                                  recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                    }
                 }
             }
+        }
+    }
+    post {
+        failure {
+            emailext subject: "Pipeline Failed: ${env.JOB_NAME}",
+                      body: "The pipeline for ${env.JOB_NAME} has failed. Please investigate the issue.",
+                      to: 'ptahgich177@gmail.com'
         }
     }
 }
