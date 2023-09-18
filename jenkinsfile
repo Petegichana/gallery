@@ -22,13 +22,11 @@ pipeline {
             steps {
                 script {
                     sh(script: 'npm test', returnStatus: true)
-    
-                    {
-                        emailext subject: "Jenkins Build ${BUILD_NUMBER} Successful",
+                    emailext subject: "Jenkins Build ${BUILD_NUMBER} Successful",
                             body: "The Jenkins build ${BUILD_NUMBER} was successful.",
                             to: 'ptahgich177@gmail.com', // Replace with the recipient email address
                             attachLog: true
-                    }
+                    
                 }
             }
         }
