@@ -23,7 +23,6 @@ pipeline {
                 sh 'npm test'
             }
         }
-    }  
     stage('Tests') {
             steps {
                 script {
@@ -39,4 +38,5 @@ pipeline {
                 }
             }
         }
+}
 }
