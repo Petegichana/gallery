@@ -22,15 +22,5 @@ pipeline {
                 sh 'npm test'
             }
         }
-        post {
-            success {
-                // Send success email notification
-            }
-            failure {
-                // Send failure email notification
-            }
     }
-
-    
-    // Add post-build actions if necessary
 }
