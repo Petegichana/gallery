@@ -16,8 +16,7 @@ pipeline {
             steps {
                 sh 'npm install'
             }
-        }
-        
+        }   
         stage('Tests') {
             steps {
                 script {
@@ -41,4 +40,10 @@ pipeline {
                       to: 'ptahgich177@gmail.com'
         }
     }
+
+    stage("Slack") {
+            steps {
+                slackSend channel: "#petergichana_ip1", message: "Deployment Succesful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}>)"
+                }
+            }
 }
