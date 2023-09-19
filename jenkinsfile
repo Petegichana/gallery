@@ -47,10 +47,10 @@ pipeline {
             }
         }
         
-       // stage("Slack") {
-         //   steps {
-         //       slackSend channel: "#petegichana_ip1", message: "Deployment Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}>)"
-        //    }
-        //}
+        stage("Slack") {
+           steps {
+               slackSend channel: "#petegichana_ip1", message: "Deployment Successful: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}>)"
+            }
+        }
     }
 }
